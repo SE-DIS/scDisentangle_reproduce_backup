@@ -1,0 +1,1 @@
+{"pert_encoder": {"<PAD>": 0, "FALSE": 1, "TRUE": 2}, "covars_encoder": {"zone": {"Pericentral": 0, "Periportal": 1}}, "pert_smiles_map": null}

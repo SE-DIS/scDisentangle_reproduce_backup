@@ -1,0 +1,17 @@
+train/val/test:15749/1750/1554
+train/test anndata:View of AnnData object with n_obs × n_vars = 15749 × 8203
+    obs: 'barcode', 'mouse', 'marker', 'time', 'infected', 'experiment', 'coarse_time', 'MB', 'eta', 'n_genes_by_counts', 'total_counts', 'total_counts_mt', 'pct_counts_mt', 'mt_qc', 'SUMPBA', 'n_counts', 'n_genes', 'mus_rRNA', 'pba_rRNA', 'pba_rRNA_fraction', 'nCount_PBA', 'nFeature_PBA', 'nCount_MUS', 'nFeature_MUS', 'RNA_snn_res.0.2', 'seurat_clusters', 'MBinfected', 'cluster_names', 'ident', 'eta_normalized', 'nCounts_tot', 'normalized_PBA', 'coarse_time_orig', 'zone', 'status', 'status_control', 'time_int', 'split_random', 'cov_cond', 'coarse_status', 'split_Infected_Pericentral', 'split_Infected_Periportal', 'split_TRUE_Pericentral', 'split_TRUE_Periportal', 'sc_cell_ids', 'cell_ids'
+    var: 'org', 'highly_variable', 'highly_variable_rank', 'means', 'variances', 'variances_norm', 'n_counts'
+    uns: 'log1p', 'rank_genes_groups_hpi', 'rank_genes_groups_hpi_specific', 'rank_genes_groups_infected', 'rank_genes_groups_status_control'
+    obsm: 'X_pca', 'X_umap'
+    varm: 'PCs'
+    layers: 'counts', 'logcounts', 'scaledata'
+    obsp: 'connectivities', 'distances'/View of AnnData object with n_obs × n_vars = 1554 × 8203
+    obs: 'barcode', 'mouse', 'marker', 'time', 'infected', 'experiment', 'coarse_time', 'MB', 'eta', 'n_genes_by_counts', 'total_counts', 'total_counts_mt', 'pct_counts_mt', 'mt_qc', 'SUMPBA', 'n_counts', 'n_genes', 'mus_rRNA', 'pba_rRNA', 'pba_rRNA_fraction', 'nCount_PBA', 'nFeature_PBA', 'nCount_MUS', 'nFeature_MUS', 'RNA_snn_res.0.2', 'seurat_clusters', 'MBinfected', 'cluster_names', 'ident', 'eta_normalized', 'nCounts_tot', 'normalized_PBA', 'coarse_time_orig', 'zone', 'status', 'status_control', 'time_int', 'split_random', 'cov_cond', 'coarse_status', 'split_Infected_Pericentral', 'split_Infected_Periportal', 'split_TRUE_Pericentral', 'split_TRUE_Periportal', 'sc_cell_ids', 'cell_ids'
+    var: 'org', 'highly_variable', 'highly_variable_rank', 'means', 'variances', 'variances_norm', 'n_counts'
+    uns: 'log1p', 'rank_genes_groups_hpi', 'rank_genes_groups_hpi_specific', 'rank_genes_groups_infected', 'rank_genes_groups_status_control'
+    obsm: 'X_pca', 'X_umap'
+    varm: 'PCs'
+    layers: 'counts', 'logcounts', 'scaledata'
+    obsp: 'connectivities', 'distances'
+train/val/test mean:0.9250772595405579/0.9763137102127075/0.8739607334136963

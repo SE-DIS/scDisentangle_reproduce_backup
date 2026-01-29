@@ -1,0 +1,23 @@
+1) post_train:
+    - Check criterions remained the same (same epoch) ***(Kang, Liver, Liver_hpi Norman, both)***
+    - Check n_epochs = 520 (or 521)
+    - Check that results match wandb results (by criterion)
+
+2) No_leak:
+    - For every dataset:
+        Load model like in inference
+        Check the mean is free from OOD leak
+
+    - Criterions free from leak (normalization, DEGs)
+
+3) scDisentangle inner working:
+    - Read methods
+    - Make simulated data
+    - Set weights of all models to 1 or 0.5 or sth
+    - Run a forward and a counterfactual:
+        Do we get exactly the output in methods?
+
+4) Reproduce one experiment in every dataset
+
+5) Same cell type have same size and norman have same size
+6) Same number of cells in all models

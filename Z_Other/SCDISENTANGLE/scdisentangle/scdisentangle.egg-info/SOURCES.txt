@@ -1,0 +1,8 @@
+LICENSE
+README.md
+setup.py
+scdisentangle.egg-info/PKG-INFO
+scdisentangle.egg-info/SOURCES.txt
+scdisentangle.egg-info/dependency_links.txt
+scdisentangle.egg-info/entry_points.txt
+scdisentangle.egg-info/top_level.txt

@@ -1,0 +1,11 @@
+train/val/test:11521/1281/774
+train/test anndata:View of AnnData object with n_obs × n_vars = 11521 × 13404
+    obs: 'orig.ident', 'nCount_RNA', 'nFeature_RNA', 'stim', 'seurat_annotations', 'integrated_snn_res.0.5', 'seurat_clusters', 'condition', 'cell_type', 'n_counts', 'cov_cond', 'split_stimulated_B', 'split_stimulated_CD14 Mono', 'split_stimulated_CD16 Mono', 'split_stimulated_CD4 T', 'split_stimulated_CD8 T', 'split_stimulated_DC', 'split_stimulated_NK', 'split_stimulated_T', 'sc_cell_ids', 'cell_ids'
+    var: 'n_counts'
+    uns: 'log1p', 'rank_genes_groups_condition'
+    layers: 'counts'/View of AnnData object with n_obs × n_vars = 774 × 13404
+    obs: 'orig.ident', 'nCount_RNA', 'nFeature_RNA', 'stim', 'seurat_annotations', 'integrated_snn_res.0.5', 'seurat_clusters', 'condition', 'cell_type', 'n_counts', 'cov_cond', 'split_stimulated_B', 'split_stimulated_CD14 Mono', 'split_stimulated_CD16 Mono', 'split_stimulated_CD4 T', 'split_stimulated_CD8 T', 'split_stimulated_DC', 'split_stimulated_NK', 'split_stimulated_T', 'sc_cell_ids', 'cell_ids'
+    var: 'n_counts'
+    uns: 'log1p', 'rank_genes_groups_condition'
+    layers: 'counts'
+train/val/test mean:0.153354674577713/0.15249627828598022/0.11824972927570343

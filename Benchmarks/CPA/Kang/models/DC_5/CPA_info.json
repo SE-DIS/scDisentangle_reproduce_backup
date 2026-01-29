@@ -1,0 +1,1 @@
+{"pert_encoder": {"<PAD>": 0, "control": 1, "stimulated": 2}, "covars_encoder": {"cell_type": {"B": 0, "CD4 T": 1, "CD8 T": 2, "CD14 Mono": 3, "CD16 Mono": 4, "DC": 5, "NK": 6, "T": 7}}, "pert_smiles_map": null}

@@ -1,0 +1,1 @@
+{"pert_encoder": {"<PAD>": 0, "Blood": 1, "Heart": 2}, "covars_encoder": {"donor": {"SIC_48": 0, "SIC_153": 1, "SIC_164": 2, "SIC_171": 3, "SIC_175": 4, "SIC_177": 5, "SIC_197": 6, "SIC_199": 7, "SIC_217": 8, "SIC_232": 9, "SIC_258": 10, "SIC_264": 11}}, "pert_smiles_map": null}

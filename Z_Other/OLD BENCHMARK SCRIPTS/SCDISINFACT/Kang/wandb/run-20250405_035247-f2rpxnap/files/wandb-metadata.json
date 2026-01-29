@@ -1,0 +1,44 @@
+{
+  "os":  "Linux-6.5.0-14-generic-x86_64-with-glibc2.35",
+  "python":  "CPython 3.10.13",
+  "startedAt":  "2025-04-05T03:52:47.585681Z",
+  "program":  "/data/Experiments/Benchmark/scdisentangle/Benchmarks/SCDISINFACT/scripts/Kang/condition.py",
+  "codePath":  "condition.py",
+  "email":  "salwo.ai94@gmail.com",
+  "root":  "/data/Experiments/Benchmark/scdisentangle/Benchmarks/SCDISINFACT/scripts/Kang",
+  "host":  "alpha-lambda-vector",
+  "executable":  "/home/SE/miniconda3/envs/trials/bin/python",
+  "codePathLocal":  "condition.py",
+  "cpu_count":  32,
+  "cpu_count_logical":  64,
+  "gpu":  "NVIDIA RTX A6000",
+  "gpu_count":  2,
+  "disk":  {
+    "/":  {
+      "total":  "982820896768",
+      "used":  "888465821696"
+    }
+  },
+  "memory":  {
+    "total":  "270065516544"
+  },
+  "cpu":  {
+    "count":  32,
+    "countLogical":  64
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA RTX A6000",
+      "memoryTotal":  "51527024640",
+      "cudaCores":  10752,
+      "architecture":  "Ampere"
+    },
+    {
+      "name":  "NVIDIA RTX A6000",
+      "memoryTotal":  "51527024640",
+      "cudaCores":  10752,
+      "architecture":  "Ampere"
+    }
+  ],
+  "cudaVersion":  "12.2"
+}

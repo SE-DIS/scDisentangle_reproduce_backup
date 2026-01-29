@@ -1,0 +1,221 @@
+wandb:
+  wandb_log: True
+  name: ''
+  project: 'SCDISENTANGLE REPRODUCE'
+  group: 'SC: Kang train_val_ood'
+
+UI:
+  launch: False
+  ide: True
+
+hardware:
+  device: 0
+
+other:
+  experiment_name: True
+  verbose: True
+
+data: 
+  file_path: '/data/Experiments/Benchmark/SCDISENTANGLE_REPRODUCE/Datasets/preprocessed_datasets/kang.h5ad'
+  default_normalization: False
+  use_counts: True
+  label_keys: ['condition', 'cell_type', 'sc_cell_ids']
+
+  highly_variable: False
+  min_gene_counts: False
+  min_cell_counts: False
+  train_size: 1
+  val_size: 0
+  test_size: 0
+  batch_size: 128
+  crispr_data: False
+  SUBSET: False
+
+OOD: 
+  apply: False
+  filter_dict:
+    condition: 'stimulated'
+    cell_type: 'Insert'
+
+growing_neurons:
+  total_neurons: 16 #8
+  lr: 0.001
+  decoder_name: 'decoder_post_train'
+
+  prior_mappers:
+    mappers:
+      condition_mapper:
+        name: 'condition'
+        embedder_name: 'condition_embedder'
+
+        collapse_name: 'stimulated'
+        collapse_target: True
+
+      cell_type_mapper:
+        name: 'cell_type'
+        embedder_name: 'cell_type_embedder'
+
+        collapse_name: 'Insert_OOD'
+        collapse_target: False
+
+models:
+  encoder_pretrain: 
+    layers: [13404, 256, 16]
+    hidden_activation: 'Sine'
+    last_activation: 'Sine'
+    xavier_init: True
+    batch_norm: False
+
+  decoder:
+    layers: [16, 1024, 1024, 1024, 13404]
+    hidden_activation: 'Sine'
+    last_activation: False
+    xavier_init: True
+    batch_norm: False 
+
+  encoder:
+    layers: [16, 256, 1]
+    hidden_activation: 'Sine'
+    last_activation: 'Sine'
+    xavier_init: True
+    batch_norm: False
+ 
+  mapper: 
+    layers: [1, 256, 16]
+    hidden_activation: 'Sine'
+    last_activation: 'Sine'
+    xavier_init: True
+    batch_norm: False
+  
+decoder_parameters:
+  use_scvi_decoder:
+    apply: True
+    n_layers: 3
+    n_hidden: 1024
+    
+    #pxr_lr: 0.0001 #0.001
+
+embedders:
+  condition_embedder:
+    n_classes: 2
+    n_dim: 2
+
+  cell_type_embedder:
+    n_classes: 8
+    n_dim: 2
+
+optimizers: 
+  condition_optimizers:
+    models: ['condition_embedder', 'cell_type_embedder']
+    lr: [0.001, 0.001]
+
+  decoder_optimizer:
+    models: ['encoder_pretrain', 'decoder']
+    lr: [0.0001, 0.0001, 0.0001] #IThird for PXR
+
+losses:
+
+  rec_from_latent_pretrain:
+    fnc_name: 'nb_loss'
+    apply: True
+    pred_key: 'px_l'
+    gt_key: 'x_inp'
+    activate_at: 0
+    stop_at: +.inf
+    weight:  0.00001
+    gradient_flow: 'all'
+
+  recover_latent:
+    fnc_name: 'recover_latent'
+    apply: True
+    latent_key: 'pre_latent'
+    post_latent_key: 'map_latent_summed'
+    activate_at: 0
+    stop_at: +.inf
+    weight: 0.002
+    gradient_flow: 'all'
+
+ 
+train:
+  set_seed: 1
+  
+  main_train:
+    epochs: 521 #1001
+
+  evaluate: True
+
+  criterions:
+    
+    r2_mean_criterion/10_all:
+      criterion: 'max'
+
+evaluations:
+  context_transfer_criterion:
+    interval: 40
+    start_eval: 0
+    stop_eval: +.inf
+    dataloaders: ['all']
+    kwargs:
+      rec_key: 'reconstructed_collapse'
+      gt_key: 'x_inp'
+      adata_degs_key: 'rank_genes_groups_condition'
+      variables_of_interest: ['condition', 'cell_type']
+      stim_name: 'stimulated'
+      eval_by: 'cell_type'
+      subset_covars: False
+      ood_covariate: 'Insert_OOD'
+      normalize_log: True
+      n_degs_list: [10, 20, 50, 100]
+
+      metrics: ['r2_mean', 'r2_delta', 'wasserstein']
+      wasserstein_degs_list: [10, 100]
+      
+      subsample:
+        gt:
+          condition: 'stimulated'
+
+        pred:
+          condition: 'control'
+
+        ctrl:
+          condition: 'control'
+
+        collapse:
+          condition_mapper:
+            apply: False
+            collapse_name: null
+          cell_type_mapper:
+            apply: False
+            collapse_name: null
+
+  evaluate_reconstruction:
+    interval: 40
+    start_eval: 0
+    stop_eval: +.inf
+    dataloaders: ['train']
+    kwargs:
+      rec_key: 'reconstructed'
+      gt_key: 'x_inp'
+
+  get_mig:
+    interval: 40
+    start_eval: 0
+    stop_eval: +.inf
+    dataloaders: ['train']
+    kwargs:
+      latent_key: 'dis_latent_stack'
+      label_keys: ['condition']
+
+save_experiment:
+  apply: True
+  experiment_path: 'weights/' #'experiments/oods1_2048bs_meanfix'
+  save_weights:
+    apply: True
+    interval: 200
+    
+  save_best_weights:
+    apply: True
+
+save_gradients: 
+  apply: True
+  interval: 100

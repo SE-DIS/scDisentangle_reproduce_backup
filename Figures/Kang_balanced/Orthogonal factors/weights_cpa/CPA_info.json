@@ -1,0 +1,1 @@
+{"pert_encoder": {"<PAD>": 0, "ctrl": 1, "control": 2, "stimulated": 3}, "covars_encoder": {}, "pert_smiles_map": null}

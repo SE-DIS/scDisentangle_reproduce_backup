@@ -1,0 +1,171 @@
+wandb:
+  wandb_log: True
+  name: 'Disentangle'
+  project: 'SCDISENTANGLE_REPRODUCE'
+  group: 'Leukemia_disentangle'
+
+UI:
+  launch: False
+  ide: True
+
+hardware:
+  device: 0
+
+other:
+  experiment_name: True
+  verbose: True
+
+data: 
+  file_path: '/data/Experiments/Benchmark/SCDISENTANGLE_REPRODUCE/Datasets/preprocessed_datasets/leukemia.h5ad'
+  default_normalization: False
+  use_counts: True
+  label_keys: ['Sample_id', 'cell_type', 'sc_cell_ids']
+
+  highly_variable: False
+  min_gene_counts: False
+  min_cell_counts: False
+  train_size: 1
+  val_size: 0
+  test_size: 0
+  batch_size: 128
+  crispr_data: False
+  SUBSET: False
+
+OOD: 
+  apply: False
+  filter_dict:
+    Sample_id: ''
+    cell_type: ''
+
+growing_neurons:
+  total_neurons: 16
+  lr: 0.001
+  decoder_name: 'decoder_post_train'
+
+  prior_mappers:
+    mappers:
+      Sample_id_mapper:
+        name: 'Sample_id'
+        embedder_name: 'Sample_id_embedder'
+
+        collapse_name: 'patient1_IP'
+        collapse_target: True
+
+models:
+  encoder_pretrain: 
+    layers: [5000, 256, 16]
+    hidden_activation: 'Sine'
+    last_activation: 'Sine'
+    xavier_init: True
+    batch_norm: False
+
+  decoder:
+    layers: [16, 256, 256, 256, 5000]
+    hidden_activation: 'Sine'
+    last_activation: False
+    xavier_init: True
+    batch_norm: False 
+
+  encoder:
+    layers: [16, 256, 1]
+    hidden_activation: 'Sine'
+    last_activation: 'Sine'
+    xavier_init: True
+    batch_norm: False
+ 
+  mapper: 
+    layers: [1, 256, 16]
+    hidden_activation: 'Sine'
+    last_activation: 'Sine'
+    xavier_init: True
+    batch_norm: False
+  
+decoder_parameters:
+  use_scvi_decoder:
+    apply: True
+    n_layers: 3
+    n_hidden: 256
+    
+embedders:
+  Sample_id_embedder:
+    n_classes: 10
+    n_dim: 3
+
+optimizers: 
+  condition_optimizers:
+    models: ['Sample_id_embedder']
+    lr: [0.001]
+
+  decoder_optimizer:
+    models: ['encoder_pretrain', 'decoder']
+    lr: [0.0001, 0.0001, 0.0001]
+
+losses:
+
+  rec_from_latent_pretrain:
+    fnc_name: 'nb_loss'
+    apply: True
+    pred_key: 'px_l'
+    gt_key: 'x_inp'
+    activate_at: 0
+    stop_at: +.inf
+    weight:  0.00001
+    gradient_flow: 'all'
+
+  recover_latent:
+    fnc_name: 'recover_latent'
+    apply: True
+    latent_key: 'pre_latent'
+    post_latent_key: 'map_latent_summed'
+    activate_at: 0
+    stop_at: +.inf
+    weight: 0.002
+    gradient_flow: 'all'
+
+ 
+train:
+  set_seed: 42
+  
+  main_train:
+    epochs: 521
+
+  evaluate: True
+
+  criterions:
+    
+    MIG_BINNED/dis_latent_stack_Sample_id_train:
+      criterion: 'max'
+
+evaluations:
+ 
+  evaluate_reconstruction:
+    interval: 20
+    start_eval: 0
+    stop_eval: +.inf
+    dataloaders: ['train']
+    kwargs:
+      rec_key: 'reconstructed'
+      gt_key: 'x_inp'
+
+  get_mig:
+    interval: 20
+    start_eval: 0
+    stop_eval: +.inf
+    dataloaders: ['train']
+    kwargs:
+      latent_key: 'dis_latent_stack'
+      label_keys: ['Sample_id']
+
+save_experiment:
+  apply: True
+  experiment_path: 'weights/'
+  save_weights:
+    apply: True
+    interval: 100
+    
+  save_best_weights:
+    apply: True
+
+save_gradients: 
+  apply: True
+  interval: 100

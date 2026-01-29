@@ -1,0 +1,11 @@
+# In config:
+
+decoder_parameters:
+  use_scvi_decoder:
+    apply: True
+    n_layers: 3
+    n_hidden: 1024
+    n_input: 16
+    n_output: 13404
+
+No need to init decoder anymore

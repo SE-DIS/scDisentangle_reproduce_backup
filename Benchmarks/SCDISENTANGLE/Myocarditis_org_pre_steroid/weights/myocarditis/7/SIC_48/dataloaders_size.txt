@@ -1,0 +1,13 @@
+train/val/test:10116/1124/59
+train/test anndata:View of AnnData object with n_obs × n_vars = 10116 × 5000
+    obs: 'tissue', 'on_steroids', 'donor', 'cell_type', 'batch', 'n_counts', 'placeholder', 'sc_cell_ids', 'split_Heart_SIC_153', 'split_Heart_SIC_164', 'split_Heart_SIC_171', 'split_Heart_SIC_197', 'split_Heart_SIC_199', 'split_Heart_SIC_217', 'split_Heart_SIC_258', 'split_Heart_SIC_264', 'split_Heart_SIC_48', 'cell_ids'
+    var: 'n_cells-0', 'percent_cells-0', 'robust-0', 'highly_variable_features-0', 'n_cells-1', 'percent_cells-1', 'robust-1', 'highly_variable_features-1', 'featureid-1', 'n_counts', 'highly_variable', 'means', 'dispersions', 'dispersions_norm'
+    uns: 'hvg', 'log1p', 'rank_genes_groups_on_steroids', 'rank_genes_groups_tissue'
+    obsm: 'X_pca', 'X_pca_harmony', 'X_umap'
+    layers: 'counts'/View of AnnData object with n_obs × n_vars = 59 × 5000
+    obs: 'tissue', 'on_steroids', 'donor', 'cell_type', 'batch', 'n_counts', 'placeholder', 'sc_cell_ids', 'split_Heart_SIC_153', 'split_Heart_SIC_164', 'split_Heart_SIC_171', 'split_Heart_SIC_197', 'split_Heart_SIC_199', 'split_Heart_SIC_217', 'split_Heart_SIC_258', 'split_Heart_SIC_264', 'split_Heart_SIC_48', 'cell_ids'
+    var: 'n_cells-0', 'percent_cells-0', 'robust-0', 'highly_variable_features-0', 'n_cells-1', 'percent_cells-1', 'robust-1', 'highly_variable_features-1', 'featureid-1', 'n_counts', 'highly_variable', 'means', 'dispersions', 'dispersions_norm'
+    uns: 'hvg', 'log1p', 'rank_genes_groups_on_steroids', 'rank_genes_groups_tissue'
+    obsm: 'X_pca', 'X_pca_harmony', 'X_umap'
+    layers: 'counts'
+train/val/test mean:0.10466500371694565/0.11018078029155731/0.08001355826854706

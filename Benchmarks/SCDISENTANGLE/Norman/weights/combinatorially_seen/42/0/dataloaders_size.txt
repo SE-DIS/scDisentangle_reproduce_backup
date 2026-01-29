@@ -1,0 +1,11 @@
+train/val/test:100559/4355/3705
+train/test anndata:View of AnnData object with n_obs × n_vars = 100559 × 5446
+    obs: 'guide_id', 'read_count', 'UMI_count', 'coverage', 'gemgroup', 'good_coverage', 'number_of_cells', 'tissue_type', 'cell_type', 'cancer', 'disease', 'perturbation_type', 'celltype', 'organism', 'condition', 'nperts', 'ngenes', 'ncounts', 'percent_mito', 'percent_ribo', 'cond_harm', 'n_counts', 'n_genes_by_counts', 'log1p_n_genes_by_counts', 'total_counts', 'log1p_total_counts', 'pct_counts_in_top_50_genes', 'pct_counts_in_top_100_genes', 'pct_counts_in_top_200_genes', 'pct_counts_in_top_500_genes', 'sc_cell_ids', 'perturbation1', 'perturbation2', 'cell_ids', 'split_ood'
+    var: 'ensemble_id', 'ncounts', 'ncells', 'n_counts', 'n_cells_by_counts', 'mean_counts', 'log1p_mean_counts', 'pct_dropout_by_counts', 'total_counts', 'log1p_total_counts', 'highly_variable', 'means', 'dispersions', 'dispersions_norm'
+    uns: 'hvg', 'log1p', 'rank_genes_groups', 'rank_genes_groups_combo_specific', 'single_perts_median', 'single_perts_median_full'
+    layers: 'counts', 'raw_norm_1e4'/View of AnnData object with n_obs × n_vars = 3705 × 5446
+    obs: 'guide_id', 'read_count', 'UMI_count', 'coverage', 'gemgroup', 'good_coverage', 'number_of_cells', 'tissue_type', 'cell_type', 'cancer', 'disease', 'perturbation_type', 'celltype', 'organism', 'condition', 'nperts', 'ngenes', 'ncounts', 'percent_mito', 'percent_ribo', 'cond_harm', 'n_counts', 'n_genes_by_counts', 'log1p_n_genes_by_counts', 'total_counts', 'log1p_total_counts', 'pct_counts_in_top_50_genes', 'pct_counts_in_top_100_genes', 'pct_counts_in_top_200_genes', 'pct_counts_in_top_500_genes', 'sc_cell_ids', 'perturbation1', 'perturbation2', 'cell_ids', 'split_ood'
+    var: 'ensemble_id', 'ncounts', 'ncells', 'n_counts', 'n_cells_by_counts', 'mean_counts', 'log1p_mean_counts', 'pct_dropout_by_counts', 'total_counts', 'log1p_total_counts', 'highly_variable', 'means', 'dispersions', 'dispersions_norm'
+    uns: 'hvg', 'log1p', 'rank_genes_groups', 'rank_genes_groups_combo_specific', 'single_perts_median', 'single_perts_median_full'
+    layers: 'counts', 'raw_norm_1e4'
+train/val/test mean:1.814192295074463/1.8362830877304077/1.7932915687561035

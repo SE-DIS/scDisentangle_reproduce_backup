@@ -1,0 +1,149 @@
+wandb:
+  wandb_log: false
+  name: ''
+  project: 'scDisentangle'
+  group: 'tutorial'
+
+hardware:
+  device: 0
+
+data:
+  # REQUIRED: absolute path to your preprocessed .h5ad
+  file_path: '/ABSOLUTE/PATH/TO/YOUR_DATASET.h5ad'
+
+  # If false, DatasetLoader will keep counts in X (recommended when use_counts: true)
+  default_normalization: false
+  use_counts: true
+
+  # REQUIRED: covariates you model (must exist in adata.obs)
+  # Example (Kang): ['condition', 'cell_type', 'sc_cell_ids']
+  label_keys: ['condition', 'cell_type', 'sc_cell_ids']
+
+  highly_variable: false
+  min_gene_counts: false
+  min_cell_counts: false
+
+  # Used only for train_val_ood (mask-based OOD splitting). For get_trainer(), split is train/val/test.
+  train_size: 1
+  val_size: 0
+  test_size: 0
+
+  batch_size: 128
+  SUBSET: false
+
+OOD:
+  apply: false
+  filter_dict: {}
+
+growing_neurons:
+  total_neurons: 16
+  lr: 0.001
+  decoder_name: 'decoder_post_train'
+  prior_mappers:
+    mappers:
+      condition_mapper:
+        name: 'condition'
+        embedder_name: 'condition_embedder'
+        collapse_name: 'stimulated'
+        collapse_target: true
+      cell_type_mapper:
+        name: 'cell_type'
+        embedder_name: 'cell_type_embedder'
+        collapse_name: 'Insert_OOD'
+        collapse_target: false
+
+models:
+  # IMPORTANT: set the first layer input dim to adata.n_vars
+  encoder_pretrain:
+    layers: [13404, 256, 16]
+    hidden_activation: 'Sine'
+    last_activation: 'Sine'
+    xavier_init: true
+    batch_norm: false
+
+  # IMPORTANT: set the last layer output dim to adata.n_vars
+  decoder:
+    layers: [16, 1024, 1024, 1024, 13404]
+    hidden_activation: 'Sine'
+    last_activation: false
+    xavier_init: true
+    batch_norm: false
+
+  encoder:
+    layers: [16, 256, 1]
+    hidden_activation: 'Sine'
+    last_activation: 'Sine'
+    xavier_init: true
+    batch_norm: false
+
+  mapper:
+    layers: [1, 256, 16]
+    hidden_activation: 'Sine'
+    last_activation: 'Sine'
+    xavier_init: true
+    batch_norm: false
+
+decoder_parameters:
+  use_scvi_decoder:
+    apply: true
+    n_layers: 3
+    n_hidden: 1024
+
+embedders:
+  # REQUIRED: set n_classes to the number of categories in your dataset for each covariate
+  condition_embedder:
+    n_classes: 2
+    n_dim: 2
+  cell_type_embedder:
+    n_classes: 8
+    n_dim: 2
+
+optimizers:
+  condition_optimizers:
+    models: ['condition_embedder', 'cell_type_embedder']
+    lr: [0.001, 0.001]
+
+  decoder_optimizer:
+    models: ['encoder_pretrain', 'decoder']
+    lr: [0.0001, 0.0001]
+
+losses:
+  rec_from_latent_pretrain:
+    fnc_name: 'nb_loss'
+    apply: true
+    pred_key: 'px_l'
+    gt_key: 'x_inp'
+    activate_at: 0
+    stop_at: +.inf
+    weight: 0.00001
+    gradient_flow: 'all'
+
+  recover_latent:
+    fnc_name: 'recover_latent'
+    apply: true
+    latent_key: 'pre_latent'
+    post_latent_key: 'map_latent_summed'
+    activate_at: 0
+    stop_at: +.inf
+    weight: 0.002
+    gradient_flow: 'all'
+
+train:
+  set_seed: 42
+  main_train:
+    epochs: 521
+  evaluate: false
+
+save_experiment:
+  apply: false
+  experiment_path: 'weights/'
+  save_weights:
+    apply: false
+    interval: 200
+  save_best_weights:
+    apply: false
+
+save_gradients:
+  apply: false
+  interval: 100
+
